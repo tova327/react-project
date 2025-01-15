@@ -1,15 +1,16 @@
 import { createContext, Dispatch } from "react"
 
 export type Usertype = {
-
-    pName: string,
-    fName: string,
-    email: string,
-    password: string,
-    adress: string,
-    phone: string
+    id:number,
+    firstName?: string,
+    lastName?: string,
+    email?: string,
+    password?: string,
+    address?: string,
+    phone?: string
 
 }
+
 
 
 type ActionType = {

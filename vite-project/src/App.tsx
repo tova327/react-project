@@ -1,13 +1,14 @@
-import './App.css'
-import User from './components/User'
+import React from 'react';
+import { BrowserRouter as Router, Route, Routes, RouterProvider } from 'react-router-dom';
+
+
+import { router } from './Router';
 
 function App() {
   
   
   return (
-    <>
-      <User/>
-    </>
+    <RouterProvider router={router} />
   )
 }
 
