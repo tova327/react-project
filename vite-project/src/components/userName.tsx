@@ -39,7 +39,7 @@ const UserName = () => {
       
         <Stack direction='row'>
         <Avatar sx={{ bgcolor: 'lightblue' }} variant="square">
-          { cuser.firstName?.length> 0 && cuser.firstName[0].toUpperCase()}
+          { cuser.firstName?.length&&cuser.firstName?.length> 0 && cuser.firstName[0].toUpperCase()}
         </Avatar>
         <div>
         {cuser.firstName}

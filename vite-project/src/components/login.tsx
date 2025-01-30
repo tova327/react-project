@@ -3,7 +3,7 @@ import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
-import { FormEvent, useRef, useState } from 'react';
+import { FormEvent, useContext, useRef, useState } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Input, TextField } from '@mui/material';
 import { mainUserContext } from './userReducer';
 import axios from 'axios';
@@ -20,11 +20,11 @@ const style = {
     p: 4,
 };
 
-export default function Login({f}:{f:Function}) {
-    const {state:cuser,dispatch:cuserDispatch}=React.useContext(mainUserContext)
+export default function Login() {
+    const {state:cuser,dispatch:cuserDispatch}=useContext(mainUserContext)
     const [showLogin,setShowLogin]=useState(true)
     
-    const [open, setOpen] = React.useState(false);
+    const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handlesubmit = async(e: FormEvent<HTMLFormElement>) => {
@@ -47,36 +47,22 @@ export default function Login({f}:{f:Function}) {
                 type:'UPDATE_USER',
                 data:{...res.data.user}
             })
-            f()
+           
          handleClose()
 
-        }catch(e){
+        }catch(e:any){
             console.log(e);
             if(e.status==401)
                 alert("this user doesn't exist")
-            
         }
-        
-        
-        
-        
-         
     }
 
-    
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
     
-    
-    // addToList({
-    //     name: nameRef.current?.value,
-    //     phone: phoneRef.current?.value
-    // })
-    // if (nameRef.current?.value) nameRef.current.value = ''
-    // if (phoneRef.current?.value) phoneRef.current.value = ''
     return (
         <div>
-            {/* <Button color="secondary">Secondary</Button> */}
+            
             {showLogin&&<Button style={{color: 'white',border:'1px solid white'}} onClick={handleOpen}>sign in</Button>}
             
             <Modal
@@ -92,10 +78,7 @@ export default function Login({f}:{f:Function}) {
                     </Typography>
                     <Typography id="modal-modal-description" sx={{ mt: 5 }}>
                         <form onSubmit={ handlesubmit}>
-                        
-
-                        
-
+                       
                         <TextField margin='normal' id="email" label="email" variant="outlined" type='email' inputRef={emailRef} required/> 
 
                         <TextField margin='normal' id="password" label="password" variant="outlined" type='password'  inputRef={passwordRef} required/> 

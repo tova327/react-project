@@ -51,7 +51,7 @@ const NewUser=()=>{
             console.log(cuser);
             
         
-        } catch (e) {
+        } catch (e:any) {
             console.log(e);
             if (e.status === 422)
                 alert('user already sign up')
@@ -62,7 +62,7 @@ const NewUser=()=>{
     
     return (
         <div>
-            {/* <Button color="secondary">Secondary</Button> */}
+           
             <Button style={{color: 'white',border:'1px solid white'}} onClick={handleOpen}>sign up</Button>
             
             <Modal

@@ -23,14 +23,11 @@ const User=()=>{
       
     return(<>
     
-    <mainUserContext.Provider value={{state:cuser,dispatch:userDispatch}}>
-      
-      <Login f={handleShowUsername}/>
-      {showUsername?<UserName/>:<NewUser/>}
-      
-      
-    </mainUserContext.Provider>
-    
+    {/* <mainUserContext.Provider value={{state:cuser,dispatch:userDispatch}}> */}
+      <Login />
+      <UserName/>
+      <NewUser/>
+    {/* </mainUserContext.Provider> */}
     </>)
 }
 
