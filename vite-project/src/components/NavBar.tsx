@@ -2,10 +2,10 @@ import React, { useContext } from 'react';
 import { AppBar, Toolbar, Typography, Button } from '@mui/material';
 import User from './User';
 import { Link } from 'react-router-dom';
-import { mainUserContext } from './userReducer';
+import { MainUserContext } from './userReducer';
 
 const NavBar = () => {
-    const { state: cuser, dispatch: cuserdispatch } = useContext(mainUserContext)
+    const { state: cuser, dispatch: cuserdispatch } = useContext(MainUserContext)
     return (
         <AppBar position="static" sx={{ height: '250px' ,padding:"20px",position:"sticky",top:'0',zIndex:'99'}}>
             <Toolbar>

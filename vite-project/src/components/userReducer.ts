@@ -25,8 +25,8 @@ type ActionType = {
 
 }
 
-export const mainUserContext = createContext<{ state: Usertype, dispatch: Dispatch<ActionType> }>({ state: {} as Usertype, dispatch: () => null })
-export const dispatchContext=createContext<Dispatch<ActionType>>(()=>null)
+export const MainUserContext = createContext<{ state: Usertype, dispatch: Dispatch<ActionType> }>({ state: {} as Usertype, dispatch: () => null })
+export const DispatchContext=createContext<Dispatch<ActionType>>(()=>null)
 export default ( state: Usertype, action: ActionType ): Usertype => {
 
     switch (action.type) {

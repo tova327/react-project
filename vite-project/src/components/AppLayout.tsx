@@ -1,7 +1,7 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "./NavBar"
 import FullRecipe from "./fullRecipe"
-import userReducer, { mainUserContext, Usertype } from "./userReducer"
+import userReducer, { MainUserContext,Usertype } from "./userReducer"
 import { useReducer } from "react"
 
 const AppLayout=()=>{
@@ -17,11 +17,11 @@ const AppLayout=()=>{
         const [cuser,userDispatch]=useReducer(userReducer,defaultUser)
 
     return(<>
-    <mainUserContext.Provider value={{state:cuser,dispatch:userDispatch}}>
+    <MainUserContext value={{state:cuser,dispatch:userDispatch}}>
         <NavBar/>
         <Outlet/>
     
-    </mainUserContext.Provider>
+    </MainUserContext>
     </>)
 }
 export default AppLayout

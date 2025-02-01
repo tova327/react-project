@@ -5,7 +5,7 @@ import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FormEvent, useContext, useRef, useState } from 'react';
 import { FormControl, FormControlLabel, FormLabel, Input, TextField } from '@mui/material';
-import { mainUserContext } from './userReducer';
+import { MainUserContext } from './userReducer';
 import axios from 'axios';
 
 const style = {
@@ -20,20 +20,18 @@ const style = {
     p: 4,
 };
 
-export default function Login() {
-    const {state:cuser,dispatch:cuserDispatch}=useContext(mainUserContext)
+export default function Login({setLogedIn}:{setLogedIn:Function}) {
+    const {state:cuser,dispatch:cuserDispatch}=useContext(MainUserContext)
     const [showLogin,setShowLogin]=useState(true)
     
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
     const handlesubmit = async(e: FormEvent<HTMLFormElement>) => {
-        
-        
-        
+      
         e.preventDefault()
         
-        setShowLogin(false)
+        
         
         try{
 
@@ -47,9 +45,9 @@ export default function Login() {
                 type:'UPDATE_USER',
                 data:{...res.data.user}
             })
-           
-         handleClose()
-
+            setShowLogin(false)
+            handleClose()
+            setLogedIn(true)
         }catch(e:any){
             console.log(e);
             if(e.status==401)

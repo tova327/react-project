@@ -1,5 +1,5 @@
 import { useEffect, useReducer, useState } from "react"
-import userReducer, { Usertype, dispatchContext, mainUserContext } from "./userReducer"
+import userReducer, { Usertype} from "./userReducer"
 import Login from "./login"
 import UserName from "./userName"
 import NewUser from "./reg.login.update"
@@ -15,19 +15,15 @@ const User=()=>{
         address: '',
         phone: ''
       }
-    const [cuser,userDispatch]=useReducer(userReducer,defaultUser)
-    const [showUsername,setShowUsername]=useState(false)
-    const handleShowUsername=()=>setShowUsername(true)
+      const [isLogin,setIsLogin]=useState(false)
 
       
       
     return(<>
     
-    {/* <mainUserContext.Provider value={{state:cuser,dispatch:userDispatch}}> */}
-      <Login />
-      <UserName/>
-      <NewUser/>
-    {/* </mainUserContext.Provider> */}
+      {!isLogin&&<Login setLogedIn={setIsLogin}/>}
+      {isLogin&&<UserName/>}
+      {!isLogin&&<NewUser setLogedIn={setIsLogin}/>}
     </>)
 }
 

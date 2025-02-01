@@ -2,7 +2,7 @@ import { Button, Modal, Box, Typography, TextField } from "@mui/material";
 import axios from "axios";
 
 import { FormEvent, useContext, useRef, useState } from "react";
-import { mainUserContext } from "./userReducer";
+import { MainUserContext } from "./userReducer";
 
 const style = {
     position: 'absolute',
@@ -16,8 +16,8 @@ const style = {
     p: 4,
   };
 
-const NewUser=()=>{
-    const {state:cuser,dispatch:cuserDispatch}=useContext(mainUserContext)
+const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
+    const {state:cuser,dispatch:cuserDispatch}=useContext(MainUserContext)
     
       const [open, setOpen] =useState(false);
       
@@ -49,7 +49,7 @@ const NewUser=()=>{
                 }
             })
             console.log(cuser);
-            
+            setLogedIn(true)
         
         } catch (e:any) {
             console.log(e);
@@ -58,8 +58,6 @@ const NewUser=()=>{
         }
         setOpen(false)
     }
-
-    
     return (
         <div>
            

@@ -1,32 +1,48 @@
-import { useDispatch, useSelector } from "react-redux"
-import { StoreType } from "../store/store"
-import { useEffect } from "react"
-import { fetchRecipes } from "../store/recipeSlice"
-import FullRecipe from "./fullRecipe"
-import { CircularProgress, Drawer } from "@mui/material"
+import * as React from 'react';
+import List from '@mui/material/List';
+import ListItem from '@mui/material/ListItem';
+import ListItemText from '@mui/material/ListItemText';
+import { useSelector, useDispatch } from 'react-redux';
+import { fetchRecipes, Recipe } from '../store/recipeSlice';
+import { StoreType } from '../store/store';
+import { Alert, CircularProgress, Divider, ListItemButton, Stack } from '@mui/material';
+import { useEffect, useState } from 'react';
+import FullRecipe from './fullRecipe';
 
-const RecipesList=()=>{
+export default function GutterlessList() {
 
-    const {list:recipesList}=useSelector((store:StoreType)=>store)
-    const dispatch:any=useDispatch()
-
+    const { list: recipesList } = useSelector((store: StoreType) => store)
+    const dispatch: any = useDispatch()
+    const[recipe,setRecipe]=useState({
+        id:0,
+        title: '',
+        description: '',
+        ingredients: [''],
+        instructions: '',
+      }as Recipe)
     useEffect(
-       ()=> {
-        dispatch(fetchRecipes())
+        () => {
+            dispatch(fetchRecipes())
         },
-    [])
+        [])
     return (
-        <>
-            {recipesList? recipesList.map(r => (
-                <FullRecipe key={r.id} recipe={r} />
-            )):<CircularProgress />}
-
-            {/* <Drawer open={true} >
-            {recipesList? recipesList.map(r => (
-                <div key={r.id}>{r.title}</div>
-            )):<CircularProgress />}
-            </Drawer> */}
-        </>
+        <Stack direction="row"
+            divider={<Divider orientation="vertical" flexItem />}
+            spacing={2}
+        >
+            <List sx={{ width: '100%', maxWidth: 360, bgcolor: 'background.paper' }}>
+                {recipesList.length!=0?recipesList.map((value) => (
+                    <ListItem key={value.id} component="div" disablePadding>
+                        <ListItemButton onClick={ ()=>setRecipe(value)}>
+                            <ListItemText primary={`${value.title}`} />
+                        </ListItemButton>
+                    </ListItem>
+                )):<CircularProgress />}
+            </List>
+            <div>
+                {recipe.id!=0?<FullRecipe recipe={recipe}/>:<Alert severity="info">the recipe you will choose should be seen here</Alert>}
+                
+            </div>
+        </Stack>
     );
 }
-export default RecipesList

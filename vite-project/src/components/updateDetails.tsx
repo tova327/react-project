@@ -7,7 +7,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import { FormEvent, useRef } from 'react';
 import { TextField } from '@mui/material';
-import { Usertype, mainUserContext } from './userReducer';
+import { Usertype, MainUserContext } from './userReducer';
 import axios from 'axios';
 
 const style = {
@@ -23,7 +23,7 @@ const style = {
 };
 
 export default function UpdatDetails() {
-    const {state:cuser,dispatch:cuserDispatch}=React.useContext(mainUserContext)
+    const {state:cuser,dispatch:cuserDispatch}=React.useContext(MainUserContext)
 
   const [open, setOpen] = React.useState(false);
   const handleOpen = () => setOpen(true);
