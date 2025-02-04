@@ -1,4 +1,4 @@
-import { Button, Modal, Box, Typography, TextField } from "@mui/material";
+import { Button, Modal, Box, Typography, TextField, Alert } from "@mui/material";
 import axios from "axios";
 
 import { FormEvent, useContext, useRef, useState } from "react";
@@ -17,6 +17,8 @@ const style = {
   };
 
 const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
+
+    const [error,setError]=useState("")
     const {state:cuser,dispatch:cuserDispatch}=useContext(MainUserContext)
     
       const [open, setOpen] =useState(false);
@@ -53,14 +55,14 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
         
         } catch (e:any) {
             console.log(e);
-            if (e.status === 422)
-                alert('user already sign up')
+            if (e.status === 400)
+                setError("User already exists")
         }
         setOpen(false)
     }
     return (
         <div>
-           
+           {error.length>0&&<Alert severity="error">{error}</Alert>}
             <Button style={{color: 'white',border:'1px solid white'}} onClick={handleOpen}>sign up</Button>
             
             <Modal
@@ -71,6 +73,7 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
                 
             >
                 <Box sx={style}>
+                    x
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         sign up // please fill:
                     </Typography>

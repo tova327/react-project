@@ -1,4 +1,4 @@
-import { createAsyncThunk, createSlice } from "@reduxjs/toolkit";
+import { createAsyncThunk, createSlice, PayloadAction } from "@reduxjs/toolkit";
 import axios from "axios";
 import { StoreType } from "./store";
 
@@ -45,6 +45,10 @@ export const addRecipe = createAsyncThunk('recipes/add',
             return response.data
         }
         catch (e: any) {
+            if(e.status==403){
+                return thunkAPI.rejectWithValue("Unauthorized")
+
+            }
             return thunkAPI.rejectWithValue(e.message)
         }
     }
@@ -54,36 +58,32 @@ const recipesSlice = createSlice({
     name: 'recipes',
     initialState: { list: [] as Recipe[], loading: true },
     reducers: {
-        // add: (state) => {
-        //     state.list.push({
-        //         id: state.list.length,
-        //         title: 'new recipe',
-        //         description: "",
-        //         ingredients: [],
-        //         instructions: ""
-        //     })
-        // }
+      
     },
     extraReducers: (builder) => {
         builder
             .addCase(fetchRecipes.fulfilled,
-                (state, action) => {
+                (state, action:PayloadAction<Recipe[]>) => {
                     console.log('fulfilled');
                     state.list = [...action.payload]
                 })
             .addCase(fetchRecipes.rejected,
                 () => {
+                    
                     console.log('failed');
                 }
             )
             .addCase(addRecipe.fulfilled,
-                (state, action) => {
+                (state, action:PayloadAction<Recipe>) => {
                     console.log('add: fulfilled');
-                    state.list = [...state.list, action.payload.recipe]
+                    state.list = [...state.list, action.payload]
                 })
             .addCase(addRecipe.rejected,
                 () => {
+                    
+
                     console.log('add: failed');
+                    
                 }
             )
     }
