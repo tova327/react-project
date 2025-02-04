@@ -1,10 +1,8 @@
 
-
 import { createBrowserRouter } from "react-router-dom";
 import AboutPage from "./components/About";
 import AppLayout from "./components/AppLayout";
 import HomePage from "./components/HomePage";
-import UpdatDetails from "./components/updateDetails";
 import RecipesList from "./components/RecipesList";
 import RecipeForm from "./components/RecipeForm";
 
