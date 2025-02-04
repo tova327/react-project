@@ -11,7 +11,7 @@ export type Recipe = {
     instructions:string
 }
 
-type RecipeToAdd={
+export type RecipeToAdd={
 
 
     title: string,

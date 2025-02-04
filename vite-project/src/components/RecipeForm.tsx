@@ -4,18 +4,11 @@ import { yupResolver } from '@hookform/resolvers/yup';
 import * as yup from 'yup';
 import { TextField, Button, Box, Typography, Snackbar } from '@mui/material';
 import AddCircleIcon from '@mui/icons-material/AddCircle';
-import { addRecipe } from '../store/recipeSlice';
+import { addRecipe, RecipeToAdd } from '../store/recipeSlice';
 import { MainUserContext } from './userReducer';
 import { useDispatch } from 'react-redux';
 import { AppDispatch } from '../store/store';
 import IngredientInput from './IngredientInput'; 
-
-type RecipeToAdd = {
-  title: string;
-  description: string;
-  ingredients: string[];
-  instructions: string;
-};
 
 const RecipeForm: React.FC = () => {
   const [errorMessage, setErrorMessage] = useState<string | null>(null);
