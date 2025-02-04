@@ -1,6 +1,5 @@
 import { Outlet } from "react-router-dom"
 import NavBar from "./NavBar"
-import FullRecipe from "./fullRecipe"
 import userReducer, { MainUserContext,Usertype } from "./userReducer"
 import { useReducer } from "react"
 

@@ -1,4 +1,3 @@
-import * as React from 'react';
 import List from '@mui/material/List';
 import ListItem from '@mui/material/ListItem';
 import ListItemText from '@mui/material/ListItemText';
@@ -9,7 +8,7 @@ import { Alert, CircularProgress, Divider, ListItemButton, Stack } from '@mui/ma
 import { useEffect, useState } from 'react';
 import FullRecipe from './fullRecipe';
 
-export default function GutterlessList() {
+export default function RecipesList() {
     const { list: recipesList } = useSelector((store: StoreType) => store);
     const dispatch = useDispatch<AppDispatch>();
     const [recipe, setRecipe] = useState<Recipe>({

@@ -1,6 +1,6 @@
 import React from 'react';
-import { Controller, UseFormSetValue } from 'react-hook-form';
-import { TextField, IconButton, Box, Button } from '@mui/material';
+import { Controller } from 'react-hook-form';
+import { TextField, IconButton, Box} from '@mui/material';
 import RemoveCircleIcon from '@mui/icons-material/RemoveCircle';
 
 interface IngredientInputProps {

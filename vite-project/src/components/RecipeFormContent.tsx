@@ -16,7 +16,7 @@ const RecipeFormContent = ({validationSchema,onSubmit}:{validationSchema:yup.Obj
     ingredients: "";
     instructions: undefined;
 }, "">,onSubmit:SubmitHandler<RecipeToAdd>}) => {
-    const { register, handleSubmit, formState: { errors }, control, reset } = useForm<RecipeToAdd>({
+    const { register, handleSubmit, formState: { errors }, control } = useForm<RecipeToAdd>({
         resolver: yupResolver(validationSchema),
         defaultValues: { ingredients: [''] },
     });
@@ -48,17 +48,17 @@ const RecipeFormContent = ({validationSchema,onSubmit}:{validationSchema:yup.Obj
             <Typography variant="h6">Ingredients</Typography>
             {ingredientFields.map((field, index) => (
                 <IngredientInput
-                    key={field.id} // Use field.id for unique key
+                    key={field.id}
                     control={control}
                     index={index}
                     errors={errors}
-                    onRemove={() => remove(index)} // Use remove method from useFieldArray
+                    onRemove={() => remove(index)}
                 />
             ))}
             <Button
                 variant="outlined"
                 startIcon={<AddCircleIcon />}
-                onClick={() => append('')} // Use append method from useFieldArray
+                onClick={() => append('')}
                 sx={{ mb: 2 }}
             >
                 Add Ingredient

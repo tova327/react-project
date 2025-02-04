@@ -37,7 +37,4 @@ export default ( state: Usertype, action: ActionType ): Usertype => {
         default:
             return state
     }
-
-
-
 }

@@ -2,7 +2,7 @@ import { Card, CardContent, Typography, List, ListItem, ListItemText, Divider, s
 import { Recipe } from "../store/recipeSlice"
 
 const ColorfulCard = styled(Card)(({ theme }) => ({
-    backgroundColor: '#ffffff', // Changed background color to white
+    backgroundColor: '#ffffff', 
     color: theme.palette.text.primary,
     maxWidth: 400,
     margin: '20px auto',
@@ -33,10 +33,10 @@ const FullRecipe=({recipe}:{recipe:Recipe})=>{
                     ))}
                 </List>
                 <Divider />
-                <Typography variant="h6" style={{ color: theme.palette.primary.main }}> {/* Changed instructions header color to primary color */}
+                <Typography variant="h6" style={{ color: theme.palette.primary.main }}> 
                     Instructions:
                 </Typography>
-                <Typography variant="body2" style={{ fontFamily: 'Arial, sans-serif' }}>{/* Set a nice font for instructions */}
+                <Typography variant="body2" style={{ fontFamily: 'Arial, sans-serif' }}>
                     {recipe.instructions}
                 </Typography>
             </CardContent>

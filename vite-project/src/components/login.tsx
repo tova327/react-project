@@ -1,10 +1,9 @@
-import * as React from 'react';
 import Box from '@mui/material/Box';
 import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FormEvent, useContext, useRef, useState } from 'react';
-import { Alert, FormControl, FormControlLabel, FormLabel, Input, TextField } from '@mui/material';
+import { Alert, TextField } from '@mui/material';
 import { MainUserContext } from './userReducer';
 import axios from 'axios';
 
@@ -21,7 +20,7 @@ const style = {
 };
 
 export default function Login({setLogedIn}:{setLogedIn:Function}) {
-    const {state:cuser,dispatch:cuserDispatch}=useContext(MainUserContext)
+    const {dispatch:cuserDispatch}=useContext(MainUserContext)
     const [showLogin,setShowLogin]=useState(true)
     const[error,setError]=useState("")
     const [open, setOpen] = useState(false);
@@ -30,8 +29,6 @@ export default function Login({setLogedIn}:{setLogedIn:Function}) {
     const handlesubmit = async(e: FormEvent<HTMLFormElement>) => {
       
         e.preventDefault()
-        
-        
         
         try{
 

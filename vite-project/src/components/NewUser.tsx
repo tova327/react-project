@@ -38,10 +38,7 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
                     email: emailRef.current?.value,
                     password: passwordRef.current?.value
                 }
-                // { headers: {'user-id':'' + userID} }//only if the user in already login
             )
-
-            //setUserId(res.data.userId)
             cuserDispatch({
                 type:"CREATE_USER",
                 data:{
