@@ -85,7 +85,11 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
                         </div>
                         </form>
                     </Typography>
-                    <Snackbar open={snackbarOpen} onClose={()=>setSnackbarOpen(false)} message={errorMessage}/>
+                    <Snackbar open={snackbarOpen} onClose={() => setSnackbarOpen(false)} >
+                        <Alert onClose={() => setSnackbarOpen(false)} severity="error" sx={{ width: '100%' }}>
+                            {errorMessage}
+                        </Alert>
+                    </Snackbar>
                 </Box>
             </Modal>
         </div>)
