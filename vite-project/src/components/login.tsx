@@ -3,7 +3,7 @@ import Button from '@mui/material/Button';
 import Typography from '@mui/material/Typography';
 import Modal from '@mui/material/Modal';
 import { FormEvent, useContext, useRef, useState } from 'react';
-import { Alert, TextField } from '@mui/material';
+import { Alert, Snackbar, TextField } from '@mui/material';
 import { MainUserContext } from './userReducer';
 import axios from 'axios';
 
@@ -20,9 +20,11 @@ const style = {
 };
 
 export default function Login({setLogedIn}:{setLogedIn:Function}) {
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
     const {dispatch:cuserDispatch}=useContext(MainUserContext)
     const [showLogin,setShowLogin]=useState(true)
-    const[error,setError]=useState("")
+    
     const [open, setOpen] = useState(false);
     const handleOpen = () => setOpen(true);
     const handleClose = () => setOpen(false);
@@ -48,7 +50,9 @@ export default function Login({setLogedIn}:{setLogedIn:Function}) {
         }catch(e:any){
             console.log(e);
             if(e.status==401)
-                setError("this user doesn't exist")
+                setErrorMessage("this user doesn't exist")
+            else setErrorMessage("something went wrong")
+            setSnackbarOpen(true)
         }
     }
 
@@ -68,7 +72,7 @@ export default function Login({setLogedIn}:{setLogedIn:Function}) {
                 
             >
                 <Box sx={style}>
-                    {error.length>0&&<Alert severity="error">{error}</Alert>}
+                    
                     <Typography id="modal-modal-title" variant="h6" component="h2">
                         sign in // please fill:
                     </Typography>
@@ -84,6 +88,7 @@ export default function Login({setLogedIn}:{setLogedIn:Function}) {
                         </div>
                         </form>
                     </Typography>
+                    <Snackbar open={snackbarOpen} onClose={()=>setSnackbarOpen(false)} message={errorMessage}/>
                 </Box>
             </Modal>
         </div>

@@ -1,5 +1,5 @@
 import React from 'react';
-import { Box, Typography, Button } from '@mui/material';
+import { Box, Typography, Button, Link } from '@mui/material';
 
 const HomePage: React.FC = () => {
   return (
@@ -20,9 +20,11 @@ const HomePage: React.FC = () => {
       <Typography variant="h5" component="h2" gutterBottom>
         Discover delicious recipes from around the globe.
       </Typography>
+      
       <Button variant="contained" color="primary" sx={{ marginTop: 2 }}>
         Get Started
       </Button>
+      
     </Box>
   );
 };

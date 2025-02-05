@@ -20,10 +20,7 @@ const RecipeForm: React.FC = () => {
     instructions: yup.string().required('Instructions are required'),
   });
   
-  const {  reset } = useForm<RecipeToAdd>({
-    resolver: yupResolver(validationSchema),
-    defaultValues: { ingredients: [''] },
-  });
+  
 
   const { state: cuser } = useContext(MainUserContext);
   const dispatch = useDispatch<AppDispatch>();
@@ -35,10 +32,10 @@ const RecipeForm: React.FC = () => {
         userid: cuser.id,
       })).unwrap();
       console.log('Form data submitted:', data);
-      reset(); 
+    
     } catch (error) {
       if (error === "Unauthorized") {
-        setErrorMessage("Unauthorized. You have to log in in order to add a recipe.");
+        setErrorMessage("Unauthorized. You have to login in order to add a recipe.");
       } else {
         setErrorMessage("An error occurred while adding the recipe.");
       }

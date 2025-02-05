@@ -16,7 +16,7 @@ const RecipeFormContent = ({validationSchema,onSubmit}:{validationSchema:yup.Obj
     ingredients: "";
     instructions: undefined;
 }, "">,onSubmit:SubmitHandler<RecipeToAdd>}) => {
-    const { register, handleSubmit, formState: { errors }, control } = useForm<RecipeToAdd>({
+    const { register, handleSubmit, formState: { errors }, control ,reset} = useForm<RecipeToAdd>({
         resolver: yupResolver(validationSchema),
         defaultValues: { ingredients: [''] },
     });
@@ -24,9 +24,10 @@ const RecipeFormContent = ({validationSchema,onSubmit}:{validationSchema:yup.Obj
         control,
         name: "ingredients" as never,
     });
+    const innerOnSubmit=(data:RecipeToAdd)=>{onSubmit(data); reset()}
     return (<>
 
-        <form onSubmit={handleSubmit(onSubmit)}>
+        <form onSubmit={handleSubmit(innerOnSubmit)}>
             <TextField
                 fullWidth
                 label="Recipe Title"

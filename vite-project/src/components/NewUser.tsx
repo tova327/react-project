@@ -1,4 +1,4 @@
-import { Button, Modal, Box, Typography, TextField, Alert } from "@mui/material";
+import { Button, Modal, Box, Typography, TextField, Alert, Snackbar } from "@mui/material";
 import axios from "axios";
 
 import { FormEvent, useContext, useRef, useState } from "react";
@@ -17,19 +17,14 @@ const style = {
   };
 
 const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
-
-    const [error,setError]=useState("")
+    const [errorMessage, setErrorMessage] = useState<string | null>(null);
+    const [snackbarOpen, setSnackbarOpen] = useState(false);
     const {state:cuser,dispatch:cuserDispatch}=useContext(MainUserContext)
-    
       const [open, setOpen] =useState(false);
-      
       const handleOpen = () => setOpen(true);
       const handleClose = () => setOpen(false);
-    
     const emailRef = useRef<HTMLInputElement>(null)
     const passwordRef = useRef<HTMLInputElement>(null)
-    
-    
    async function  handlesubmit(e: FormEvent<HTMLFormElement>) {
         e.preventDefault();
         try{
@@ -49,17 +44,20 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
             })
             console.log(cuser);
             setLogedIn(true)
+            setOpen(false)
         
         } catch (e:any) {
             console.log(e);
+           
             if (e.status === 400)
-                setError("User already exists")
+                setErrorMessage("User already exists")
+            else setErrorMessage("something went wrong")
+            setSnackbarOpen(true)
         }
-        setOpen(false)
+        
     }
     return (
         <div>
-           {error.length>0&&<Alert severity="error">{error}</Alert>}
             <Button style={{color: 'white',border:'1px solid white'}} onClick={handleOpen}>sign up</Button>
             
             <Modal
@@ -67,7 +65,6 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
                 onClose={handleClose}
                 aria-labelledby="modal-modal-title"
                 aria-describedby="modal-modal-description"
-                
             >
                 <Box sx={style}>
                     x
@@ -88,6 +85,7 @@ const NewUser=({setLogedIn}:{setLogedIn:Function})=>{
                         </div>
                         </form>
                     </Typography>
+                    <Snackbar open={snackbarOpen} onClose={()=>setSnackbarOpen(false)} message={errorMessage}/>
                 </Box>
             </Modal>
         </div>)
